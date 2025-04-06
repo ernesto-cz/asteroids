@@ -17,13 +17,12 @@ class Asteroid(CircleShape):
     def split(self):
         self.kill()
         if self.radius <= ASTEROID_MIN_RADIUS:
-            self.kill()
-            return "Thid was an small asteroid"
+            return
         angle = random.uniform(20,50)
         p_random_angle = self.velocity.rotate(angle)
         n_random_angle = self.velocity.rotate(-angle)
         new_radius = self.radius - ASTEROID_MIN_RADIUS
-        icarus = Asteroid(*self.position, radius=new_radius)
-        hallas = Asteroid(*self.position, radius=new_radius)
+        icarus = Asteroid(self.position.x, self.position.y, new_radius)
+        hallas = Asteroid(self.position.x, self.position.y, new_radius)
         icarus.velocity = p_random_angle * 1.2
         hallas.velocity = n_random_angle * 1.2
